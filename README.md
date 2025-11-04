@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-> A modern, responsive browser gaming platform featuring classic games built with vanilla HTML, CSS, and JavaScript.
+A futuristic browser gaming platform with 5 classic games, glassmorphism UI, and smooth animations. Built with vanilla HTML, CSS & JavaScript..
 
 ## 🚀 Demo
 
