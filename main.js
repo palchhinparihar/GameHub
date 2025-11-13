@@ -40,6 +40,14 @@ const games = [
     file: "games/rps.html",
     category: "strategy",
   },
+  {
+        id: '2048',
+        title: '2048 Game',
+        description: 'Slide tiles to reach 2048',
+        image: 'https://play-lh.googleusercontent.com/I-cDz4JCEufeRmvJCYLJO_p9i4xCcToKpOtzwvwaYoHU1HmcglEHejPceMeNYSDBXAo',
+        file: 'games/2048.html',
+        category: 'puzzle'
+  },
 ];
 
 // Initialize AOS
