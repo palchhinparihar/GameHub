@@ -55,6 +55,14 @@ const games = [
         image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=250&fit=crop&crop=center&auto=format&q=80',
         file: 'games/sudoku.html',
         category: 'puzzle'
+  },
+  {
+        id: 'minesweeper',
+        title: 'Minesweeper',
+        description: 'Clear the field without hitting mines',
+        image: 'https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=250&fit=crop&crop=center&auto=format&q=80',
+        file: 'games/minesweeper.html',
+        category: 'puzzle'
   }
 ];
 
