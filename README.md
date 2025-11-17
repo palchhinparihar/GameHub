@@ -1,4 +1,5 @@
 # 🎮 GameHub
+ A modern, responsive collection of classic browser games built with vanilla JavaScript, Tailwind CSS, and Django. Play instantly - no downloads required! 🎯
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
@@ -9,7 +10,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/kaifansariw/GameHub?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues/kaifansariw/GameHub?style=for-the-badge)
 
-> A modern, responsive collection of classic browser games built with vanilla JavaScript, Tailwind CSS, and Django. Play instantly - no downloads required! 🎯
+>
 
 ***
 
