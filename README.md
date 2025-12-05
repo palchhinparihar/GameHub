@@ -81,13 +81,50 @@ In an era of complex game engines and heavy frameworks, GameHub proves that amaz
 
 ## 🎮 Games
 
-| Game                     | Description              | Features                              |
-|--------------------------|-------------------------|---------------------------------------|
-| **Tic Tac Toe**          | Classic 3x3 grid        | Score tracking, animations            |
-| **Snake**                | Canvas arcade game      | Keyboard/touch controls, high scores  |
-| **Simon Says**           | Pattern memory challenge| Progressive difficulty, feedback      |
-| **Memory Flip**          | Card matching puzzle    | Move counter, best score              |
-| **Rock Paper Scissors**  | VS Computer             | Win/loss stats, animations            |
+| Game                     | Description                              | Features                                         |
+|--------------------------|------------------------------------------|--------------------------------------------------|
+| **Rock Paper Scissors**  | Classic hand game                        | Win/loss stats, animations                       |
+| **2048 Game**            | Tile sliding number puzzle               | Score tracking, smooth animations                |
+| **Sudoku Puzzle**        | Number placement puzzle                  | Multiple difficulties, hints                     |
+| **Minesweeper**          | Mine avoidance logic game                | Flagging cells, timer                            |
+| **Breakout**             | Brick-breaking arcade game               | Paddle control, increasing difficulty            |
+| **Balloon Popper**       | Pop balloons before time runs out        | Timer-based gameplay, score system               |
+| **Boom Runner**          | Dodge bombs and survive                  | Reflex-based controls, speed increase            |
+| **Brick Breaker**        | Break bricks using a paddle              | Power-ups, levels                                |
+| **Bubble Shooter**       | Match and pop colored bubbles            | Aim mechanics, combo scoring                     |
+| **Candy Match Mania**    | Match candies to score points            | Chain reactions, colorful UI                     |
+| **Code Unlock**          | Crack codes using logic                  | Pattern recognition, increasing difficulty       |
+| **Color Grid**           | Color-matching puzzle                    | Visual logic, timed challenges                   |
+| **Dodge Square**         | Avoid obstacles and survive              | Fast-paced movement, reflex testing              |
+| **Firefly Flow**         | Guide fireflies through patterns         | Precision control, calming visuals               |
+| **Flappy Block**         | Navigate obstacles by flapping           | Score tracking, increasing difficulty            |
+| **Freeze Frame**         | Stop motion at the right moment          | Timing-based gameplay                            |
+| **Fruit Slice**          | Slice fruits with precision              | Swipe controls, combo points                     |
+| **Glow Chain**           | Trigger glowing chain reactions          | Visual effects, chain mechanics                  |
+| **Glow Drops**           | Tap glowing drops before disappearing    | Speed-based taps, score counter                  |
+| **Glow Tap**             | Tap glowing circles in time              | Timing accuracy, reflex training                 |
+| **Gravity Flip Ball**    | Flip gravity to move the ball            | Physics-based gameplay, level progression        |
+| **Hangman Hero**         | Guess the hidden words                   | Vocabulary building, hint system                 |
+| **Jump Counter**         | Jump to increase your score              | Score tracking, timing precision                 |
+| **Jump Tag**             | Tag targets by jumping                   | Movement accuracy, reflex-based                  |
+| **Logic Path**           | Guide the ball using logic               | Puzzle-solving, progressive levels               |
+| **Memory Blink**         | Remember blinking patterns               | Memory training, increasing speed                |
+| **Pattern Memory**       | Remember and repeat patterns             | Sequence memory, difficulty scaling             |
+| **Pipe Twister**         | Rotate pipes to connect flows            | Logic rotation puzzles                           |
+| **Reaction Speed Test**  | Test your reaction speed                 | Tap-time measurement, instant feedback           |
+| **Sand Draw**            | Draw freely in virtual sand              | Relaxing UI, creative drawing                   |
+| **Sliding Puzzle**       | Slide blocks to complete image           | Logical movement, image puzzles                  |
+| **Speed Tap Grid**       | Tap targets quickly on a grid            | Reflex speed, time challenge                     |
+| **Symbol Swap**          | Swap symbols to match rows               | Pattern logic, strategic thinking                |
+| **Tap Counter**          | Tap repeatedly to score                  | Speed tracking, real-time counter                |
+| **Tetris**               | Classic falling block puzzle             | Line clearing, increasing speed                  |
+| **Tower of Hanoi**       | Solve disk puzzle in minimum moves       | Algorithmic thinking, step counter               |
+| **Typing Sprint**        | Type words quickly to score              | Speed tracking, accuracy scoring                 |
+| **Vortex Jump**          | Jump through twisting vortex paths       | Precision jumps, reaction timing                 |
+| **Word Chain**           | Form chains of related words             | Vocabulary skills, word logic                    |
+| **Word Scramble**        | Unscramble letters to form words         | Time-based challenges, hints                     |
+| **Typing Speed Test**    | Measure typing speed and accuracy        | WPM tracking, clean UI                           |
+
 
 ***
 
