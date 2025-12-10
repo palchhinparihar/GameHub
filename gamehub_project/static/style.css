@@ -636,3 +636,29 @@ body,
                 border-color 0.3s ease,
                 box-shadow 0.3s ease;
 }
+
+/* THEMES  */
+
+[data-theme="light"] {
+    background-color: #ffffff !important;
+    color: #111 !important;
+    transition: all 0.25s ease-in-out;
+}
+
+[data-theme="dark"] {
+    background-color: #0f0f0f !important;
+    color: #fff !important;
+    transition: all 0.25s ease-in-out;
+}
+
+/* Navbar Light Mode */
+[data-theme="light"] .glass-nav {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Navbar Dark Mode */
+[data-theme="dark"] .glass-nav {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
