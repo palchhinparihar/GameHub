@@ -662,3 +662,139 @@ body,
     background: rgba(0, 0, 0, 0.2) !important;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+
+/* ============================================
+   WHACK-A-MOLE GAME STYLES
+   ============================================ */
+
+/* Whack-A-Mole Toast Notifications */
+.whack-toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 220ms ease;
+}
+
+/* Mole Grid Responsive Design */
+@media (max-width: 768px) {
+    .mole-grid {
+        gap: 1rem !important;
+        padding: 0 1rem;
+    }
+    
+    .mole-hole {
+        border-width: 2px;
+    }
+    
+    .mole {
+        width: 75% !important;
+        height: 75% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .mole-grid {
+        gap: 0.75rem !important;
+    }
+    
+    .mole {
+        width: 70% !important;
+        height: 70% !important;
+    }
+}
+
+/* Mole Animation Enhancement */
+.mole.active {
+    animation: molePopUp 0.2s ease;
+}
+
+@keyframes molePopUp {
+    0% {
+        bottom: -100%;
+        transform: translateX(-50%) scale(0.5);
+    }
+    100% {
+        bottom: 10%;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Game Over Modal Animation */
+.game-over-modal {
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Button Pulse Effect on Hover */
+.btn-game:hover {
+    animation: buttonPulse 0.5s ease infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        transform: translateY(-2px) scale(1);
+    }
+    50% {
+        transform: translateY(-2px) scale(1.05);
+    }
+}
+
+/* Score Counter Animation */
+@keyframes scoreIncrease {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* High Score Glow Effect */
+.stat-value {
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+}
+
+/* Mole Hole Glow on Active */
+.mole-hole:has(.mole.active) {
+    border-color: rgba(245, 158, 11, 0.8) !important;
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.6) !important;
+}
+
+/* Light Mode Support for Whack-A-Mole */
+[data-theme="light"] .game-container {
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.05));
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+[data-theme="light"] .mole-hole {
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+[data-theme="light"] .stat {
+    color: #1f2937;
+}
+
+[data-theme="light"] .alert {
+    background: linear-gradient(145deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.1));
+    color: #1f2937;
+}

@@ -73,6 +73,14 @@ const games = [
     category: 'arcade'
   },
   {
+    id: "whack-a-mole",
+    title: "Whack-A-Mole",
+    description: "Whack the moles before time runs out",
+    image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=250&fit=crop&crop=center&auto=format&q=80",
+    file: "/static/games/whack-a-mole.html",
+    category: "arcade"
+  },
+  {
     id: "balloon-popper",
     title: "Balloon Popper",
     description: "Pop balloons before time runs out",
@@ -375,7 +383,15 @@ const games = [
     image: '/static/games/flappyBird/Logo.png',
     file: '/static/games/flappyBird/flappy.html',
     category: 'arcade'
-  }
+  },
+  {
+  id: "whack-a-mole",
+  title: "Whack-A-Mole",
+  description: "Whack the moles before time runs out",
+  image: "/static/assets/Whake-a-mole.png",
+  file: "/static/games/whack-a-mole.html",
+  category: "arcade"
+}
 ];
 
 // ============================================
