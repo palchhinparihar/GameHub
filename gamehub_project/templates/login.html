@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <title>Login / Register</title>
 
-    <style>
+     <style>
         * {
             margin: 0;
             padding: 0;
@@ -82,21 +82,29 @@
             margin: 15px 0 10px;
         }
 
-        .container button {
-            background-color: #2da0a8;
-            color: #fff;
-            font-size: 14px;
-            /* was 12px */
-            padding: 12px 50px;
-            /* slightly bigger */
-            border: 1px solid transparent;
-            border-radius: 8px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            cursor: pointer;
-        }
+.container button {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 700;
+
+    background: linear-gradient(135deg, #2da0a8, #59d6ff);
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    color: #fff;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+}
+
+.container button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(89, 214, 255, 0.35);
+}
+
 
 
         .container button.hidden {
@@ -114,17 +122,31 @@
             height: 100%;
         }
 
-        .container input {
-            background-color: #eee;
-            border: none;
-            margin: 8px 0;
-            padding: 12px 18px;
-            font-size: 15px;
-            /* was 13px */
-            border-radius: 8px;
-            width: 100%;
-            outline: none;
-        }
+        
+.container input {
+    width: 100%;
+    padding: 12px 18px;
+    margin: 10px 0;
+    font-size: 15px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+
+    backdrop-filter: blur(6px);
+    transition: 0.25s ease-in-out;
+}
+
+.container input::placeholder {
+    color: #dcdcdc;
+}
+
+.container input:focus {
+    border-color: #4ce3ff;
+    box-shadow: 0 0 6px rgba(76, 227, 255, 0.6);
+    background: rgba(255, 255, 255, 0.20);
+}
 
         .form-container {
             position: absolute;
