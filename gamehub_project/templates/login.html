@@ -1,4 +1,4 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +35,11 @@
             justify-content: center;
             flex-direction: column;
             height: 100vh;
-            background-image: url('https://store.fastly.steamstatic.com/public/shared/images/joinsteam/new_login_bg_strong_mask.jpg');
+          
+  background: linear-gradient(135deg, #020617, #0f172a, #1e40af);
+          
+
+
             background-size: cover;
         }
 
@@ -281,7 +285,7 @@
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form action="{% url 'register' %}" method="post">
-                {% csrf_token %}
+               
                 <h1 style="margin-bottom: 10px;">Create Account</h1>
                 
 
@@ -292,11 +296,7 @@
                 <input type="password" name="password1" placeholder="Password" />
                 <input type="password" name="password2" placeholder="Confirm Password" />
                 <button type="submit" style="margin-bottom:20px;">Sign Up</button>
-                <div>
-                    {% for message in messages %}
-                    <h3>{{message}}</h3>
-                    {% endfor %}
-                </div>
+                
             </form>
         </div>
         <div class="form-container sign-in">
@@ -309,11 +309,7 @@
                 <a href="#">Forget Your Password?</a>
                 <button type="submit" style="margin-bottom:20px;">Login</button>
 
-                <div>
-                    {% for message in messages %}
-                    <h3>{{message}}</h3>
-                    {% endfor %}
-                </div>
+                
             </form>
         </div>
         <div class="toggle-container">
