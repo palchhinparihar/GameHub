@@ -57,20 +57,20 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <div class="relative hidden sm:block">
                         <input type="text" id="searchInput" placeholder="Search games..." class="search-input" />
                         <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
 
                     {% if user.is_authenticated %}
-                    <span class="text-purple-500 font-bold font-rajdhani">👋</span>
-                    <span class="font-orbitron font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <span class="hidden md:inline text-purple-500 font-bold font-rajdhani">👋</span>
+                    <span class="hidden md:inline font-orbitron font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-sm lg:text-base">
                         Hello, {{ user.first_name|default:user.username }}
                     </span>
-                    <a href="{% url 'logout' %}" class="neon-button secondary text-sm">Logout</a>
+                    <a href="{% url 'logout' %}" class="neon-button secondary text-xs md:text-sm px-2 md:px-4">Logout</a>
                     {% else %}
-                    <a href="{% url 'login' %}" class="neon-button secondary text-sm">Login</a>
+                    <a href="{% url 'login' %}" class="neon-button secondary text-xs md:text-sm px-2 md:px-4">Login</a>
                     {% endif %}
 
                     <button id="themeToggle" class="theme-toggle">
@@ -83,7 +83,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-16">
+    <section class="relative min-h-screen flex items-center justify-center">
         <div class="container mx-auto px-4 text-center relative z-10">
             <div class="max-w-4xl mx-auto">
                 <h1 class="font-orbitron font-black text-6xl md:text-8xl mb-6 animate__animated animate__fadeInDown">

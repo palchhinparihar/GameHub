@@ -113,6 +113,17 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+    padding-top: 64px; /* Account for fixed navbar */
+}
+
+/* Hero section specific styling */
+section {
+    position: relative;
+}
+
+section:first-of-type {
+    margin-top: 0;
+    min-height: calc(100vh - 64px);
 }
 
 .font-orbitron {
@@ -151,6 +162,61 @@ body {
     background: var(--glass-bg);
     border-bottom: 1px solid var(--glass-border);
     transition: all 0.3s ease;
+    height: 64px;
+    z-index: 1000;
+}
+
+.glass-nav .container {
+    height: 100%;
+}
+
+.glass-nav .flex {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+}
+
+/* Fix for navbar content overflow */
+@media (max-width: 1024px) {
+    .glass-nav .search-input {
+        width: 120px;
+        font-size: 0.875rem;
+    }
+    
+    .glass-nav .nav-link {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 64px;
+    }
+    
+    .glass-nav {
+        height: auto;
+        min-height: 64px;
+    }
+    
+    .glass-nav .container {
+        padding: 0.5rem 1rem;
+    }
+    
+    .glass-nav .flex {
+        gap: 0.25rem;
+    }
+    
+    .search-input {
+        width: 100px;
+        padding: 6px 32px 6px 12px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .glass-nav .nav-link {
+        display: none;
+    }
 }
 
 .glass-card {

@@ -53,7 +53,7 @@ const games = [
     title: 'Sudoku Puzzle',
     description: 'Classic number placement puzzle',
     image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=250&fit=crop&crop=center&auto=format&q=80',
-    file: 'games/sudoku.html',
+    file: '/static/games/sudoku.html',
     category: 'puzzle'
   },
   {
@@ -61,7 +61,7 @@ const games = [
     title: 'Minesweeper',
     description: 'Clear the field without hitting mines',
     image: 'https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=250&fit=crop&crop=center&auto=format&q=80',
-    file: 'games/minesweeper.html',
+    file: '/static/games/minesweeper.html',
     category: 'puzzle'
   },
   {
@@ -69,7 +69,7 @@ const games = [
     title: 'Breakout',
     description: 'Break all the bricks with paddle and ball',
     image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=250&fit=crop&crop=center&auto=format&q=80',
-    file: 'games/breakout.html',
+    file: '/static/games/breakout.html',
     category: 'arcade'
   },
   {
@@ -554,12 +554,6 @@ function setupSystemThemeListener() {
 // GAME RENDERING AND SEARCH
 // ============================================
 
-// Initialize AOS
-AOS.init({
-  duration: 800,
-  once: true,
-});
-
 // Render games with futuristic styling
 function renderGames(gamesToRender = games) {
   const gamesGrid = document.getElementById("gamesGrid");
@@ -594,8 +588,10 @@ function renderGames(gamesToRender = games) {
     gamesGrid.appendChild(gameCard);
   });
 
-  // Refresh AOS
-  AOS.refresh();
+  // Refresh AOS if available
+  if (typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
 }
 
 // Enhanced search with animations
@@ -665,6 +661,14 @@ function createParticles() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize AOS (Animate On Scroll)
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }
+  
   // Initialize theme FIRST (before anything else renders)
   initializeTheme();
   
@@ -690,6 +694,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   console.log("✅ GameHub initialized successfully!");
+  console.log(`📊 Total games loaded: ${games.length}`);
 });
 
 // Smooth scrolling for navigation links
