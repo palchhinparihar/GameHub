@@ -122,34 +122,54 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="relative py-20">
-        <div class="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20"></div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="font-orbitron font-bold text-4xl md:text-5xl mb-8" data-aos="fade-up">
-                    <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">About GameHub</span>
-                </h2>
-                <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="200">
-                    <p class="font-rajdhani text-xl text-gray-300 mb-6">
-                        GameHub is your ultimate destination for premium browser gaming experiences.
-                        Built with cutting-edge web technologies and stunning visual effects.
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                            <i class="fas fa-bolt text-3xl text-yellow-400 mb-4"></i>
-                            <h3 class="font-orbitron font-semibold text-lg mb-2">Lightning Fast</h3>
-                            <p class="text-gray-400">Instant loading with no downloads required</p>
+    <section id="about" class="about-section">
+        <div class="container">
+            
+            <!-- Main Glass Card -->
+            <div class="glass-card about-card" data-aos="fade-up">
+                <div class="about-content">
+                    <!-- Project Intro -->
+                    <div class="about-text">
+                        <h2>About GameHub</h2>
+                        <p>
+                            GameHub is a next-generation browser gaming platform designed to bring premium gaming experiences directly to the web. 
+                            Built as an open-source initiative, it aims to eliminate the barrier between players and fun—no downloads, no installations, just instant play.
+                        </p>
+                        <p>
+                            Whether you are a casual gamer looking for a quick break or a competitive player climbing the leaderboards, GameHub offers a seamless experience across all devices.
+                        </p>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-bolt feature-icon"></i>
+                            <h3>Lightning Fast</h3>
+                            <p>Powered by optimized web technologies for instant load times and zero lag.</p>
                         </div>
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-mobile-alt text-3xl text-green-400 mb-4"></i>
-                            <h3 class="font-orbitron font-semibold text-lg mb-2">Cross Platform</h3>
-                            <p class="text-gray-400">Play on any device, anywhere, anytime</p>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt feature-icon"></i>
+                            <h3>Cross Platform</h3>
+                            <p>Responsive design that works perfectly on Desktop, Tablet, and Mobile.</p>
                         </div>
-                        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                            <i class="fas fa-trophy text-3xl text-purple-400 mb-4"></i>
-                            <h3 class="font-orbitron font-semibold text-lg mb-2">High Scores</h3>
-                            <p class="text-gray-400">Track your progress and compete with friends</p>
+                        <div class="feature-item">
+                            <i class="fas fa-trophy feature-icon"></i>
+                            <h3>Global Leaderboards</h3>
+                            <p>Track your high scores and compete with players from around the world.</p>
                         </div>
+                        <div class="feature-item">
+                            <i class="fas fa-code feature-icon"></i>
+                            <h3>Modern Tech</h3>
+                            <p>Built with Django, HTML5, and CSS3 to demonstrate modern web capabilities.</p>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action / GitHub Link -->
+                    <div class="about-footer">
+                        <p>Check out the code on GitHub</p>
+                        <a href="https://github.com/kaifansariw/GameHub" target="_blank" class="github-btn">
+                            <i class="fab fa-github"></i> View Repository
+                        </a>
                     </div>
                 </div>
             </div>
