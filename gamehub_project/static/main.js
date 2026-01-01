@@ -752,27 +752,25 @@ const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
 
 // Load saved theme
-let savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "light") {
-    body.setAttribute("data-theme", "light");
-    themeToggle.innerHTML = `<i class="fas fa-sun"></i>`;
-} else {
-    body.setAttribute("data-theme", "dark");
-    themeToggle.innerHTML = `<i class="fas fa-moon"></i>`;
-}
+let savedTheme = localStorage.getItem("theme") || "dark";
+body.setAttribute("data-theme", savedTheme);
+updateIcon(savedTheme);
 
 // Toggle theme
 themeToggle.addEventListener("click", () => {
     let currentTheme = body.getAttribute("data-theme");
+    let newTheme = currentTheme === "dark" ? "light" : "dark";
 
-    if (currentTheme === "dark") {
-        body.setAttribute("data-theme", "light");
-        themeToggle.innerHTML = `<i class="fas fa-sun"></i>`;
-        localStorage.setItem("theme", "light");
-    } else {
-        body.setAttribute("data-theme", "dark");
-        themeToggle.innerHTML = `<i class="fas fa-moon"></i>`;
-        localStorage.setItem("theme", "dark");
-    }
+    body.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    updateIcon(newTheme);
 });
+
+// Update icon based on CURRENT theme
+function updateIcon(theme) {
+    if (theme === "dark") {
+        themeToggle.innerHTML = `<i class="fas fa-sun"></i>`; // switch to light
+    } else {
+        themeToggle.innerHTML = `<i class="fas fa-moon"></i>`; // switch to dark
+    }
+}
