@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,15 +6,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Same fonts used in GameHub -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <!-- GameHub Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <title>Login / Register</title>
+    
+    <title>GameHub - Access</title>
 
-     <style>
+    <style>
+        :root {
+            /* GameHub Theme Variables */
+            --primary-purple: #8b5cf6;
+            --primary-pink: #ec4899;
+            --bg-deep: #0f0f23;
+            --glass-bg: rgba(15, 23, 42, 0.75); /* Darker, higher contrast glass */
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -23,136 +29,79 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
-        h1,
-        h2,
-        h3,
-        button {
-            font-family: 'Orbitron', sans-serif;
-        }
-
         body {
+            /* High Contrast Deep Blue Background */
+            background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             height: 100vh;
-          
-  background: linear-gradient(135deg, #020617, #0f172a, #1e40af);
-          
-
-
-            background-size: cover;
+            overflow: hidden;
+            position: relative;
         }
 
-        .container {
-            background-color: rgb(71, 70, 70);
-            border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-            position: relative;
-            overflow: hidden;
-            width: 768px;
-            max-width: 100%;
-            min-height: 580px;
-            color: white;
-            font-size: 12px;
+        /* Subtle Glow behind the card to separate it from background */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 40%);
+            z-index: -1;
         }
 
         h1 {
-            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Stronger shadow for contrast */
         }
 
-        h2,
-        h3 {
-            font-size: 1.4rem;
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+            margin: 20px 0 30px;
+            color: #cbd5e1; /* Much brighter gray for readability */
+            font-weight: 500;
         }
 
-        .container p {
-            font-size: 15px;
-            line-height: 22px;
-            letter-spacing: 0.3px;
-            margin: 20px 0;
-        }
-
-
-        .container span {
-            font-size: 13px;
-        }
-
-        .container a {
-            color: #fff;
-            font-size: 12px;
+        a {
+            color: #c4b5fd; /* Light purple */
+            font-size: 14px;
             text-decoration: none;
             margin: 15px 0 10px;
+            transition: 0.3s;
+            font-weight: 600;
         }
 
-.container button {
-    width: 100%;
-    padding: 12px 20px;
-    margin-top: 15px;
-    font-size: 15px;
-    font-weight: 700;
-
-    background: linear-gradient(135deg, #2da0a8, #59d6ff);
-    border: none;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-
-    color: #fff;
-    cursor: pointer;
-    transition: 0.25s ease-in-out;
-}
-
-.container button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(89, 214, 255, 0.35);
-}
-
-
-
-        .container button.hidden {
-            background-color: transparent;
-            border-color: #fff;
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        .container form {
-            background-color: rgb(71, 70, 70);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 0 40px;
-            height: 100%;
+        /* MAIN CARD CONTAINER */
+        .container {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(25px); /* Stronger Blur */
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            /* Strong shadow to lift card off background */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); 
+            position: relative;
+            overflow: hidden;
+            width: 850px;
+            max-width: 95%;
+            min-height: 600px;
         }
 
-        
-.container input {
-    width: 100%;
-    padding: 12px 18px;
-    margin: 10px 0;
-    font-size: 15px;
-
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-
-    backdrop-filter: blur(6px);
-    transition: 0.25s ease-in-out;
-}
-
-.container input::placeholder {
-    color: #dcdcdc;
-}
-
-.container input:focus {
-    border-color: #4ce3ff;
-    box-shadow: 0 0 6px rgba(76, 227, 255, 0.6);
-    background: rgba(255, 255, 255, 0.20);
-}
-
+        /* FORMS */
         .form-container {
             position: absolute;
             top: 0;
@@ -160,14 +109,82 @@
             transition: all 0.6s ease-in-out;
         }
 
+        .container form {
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* INPUT FIELDS - High Contrast */
+        .container input {
+            background: rgba(0, 0, 0, 0.4); /* Dark background makes white text pop */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .container input::placeholder {
+            color: #94a3b8; /* Visible placeholder */
+            font-weight: 400;
+        }
+
+        .container input:focus {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: #60a5fa; /* Bright Blue border on focus */
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+        }
+
+        /* BUTTONS */
+        button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6); /* Blue to Purple */
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            padding: 12px 45px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+
+        /* === OVERLAP FIX (Preserved) === */
         .sign-in {
             left: 0;
             width: 50%;
             z-index: 2;
+            opacity: 1; 
         }
 
         .container.active .sign-in {
             transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .sign-up {
@@ -175,45 +192,23 @@
             width: 50%;
             opacity: 0;
             z-index: 1;
+            pointer-events: none;
         }
 
         .container.active .sign-up {
             transform: translateX(100%);
             opacity: 1;
             z-index: 5;
+            pointer-events: all;
             animation: move 0.6s;
         }
 
         @keyframes move {
-
-            0%,
-            49.99% {
-                opacity: 0;
-                z-index: 1;
-            }
-
-            50%,
-            100% {
-                opacity: 1;
-                z-index: 5;
-            }
+            0%, 49.99% { opacity: 0; z-index: 1; }
+            50%, 100% { opacity: 1; z-index: 5; }
         }
 
-        .social-icons {
-            margin: 20px 0;
-        }
-
-        .social-icons a {
-            border: 1px solid #ccc;
-            border-radius: 20%;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 3px;
-            width: 40px;
-            height: 40px;
-        }
-
+        /* TOGGLE PANEL */
         .toggle-container {
             position: absolute;
             top: 0;
@@ -232,13 +227,12 @@
         }
 
         .toggle {
-            background-color: #2da0a8;
+            /* High Contrast Toggle Gradient */
+            background: linear-gradient(to right, #1e3a8a, #4f46e5, #7c3aed);
             height: 100%;
-            background: linear-gradient(to right, #5c6bc0, #2da0a8);
             color: #fff;
             position: relative;
             left: -100%;
-            height: 100%;
             width: 200%;
             transform: translateX(0);
             transition: all 0.6s ease-in-out;
@@ -263,6 +257,17 @@
             transition: all 0.6s ease-in-out;
         }
 
+        button.hidden {
+            background: transparent;
+            border: 2px solid #fff;
+            box-shadow: none;
+        }
+
+        button.hidden:hover {
+            background: #fff;
+            color: #1e3a8a; /* Dark Blue text on hover */
+        }
+
         .toggle-left {
             transform: translateX(-200%);
         }
@@ -279,63 +284,95 @@
         .container.active .toggle-right {
             transform: translateX(200%);
         }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+            .form-container {
+                width: 100%;
+                left: 0;
+            }
+            .toggle-container {
+                display: none;
+            }
+            .sign-in, .sign-up {
+                width: 100%;
+                position: relative;
+                transform: none !important;
+                opacity: 1 !important;
+                z-index: 1 !important;
+            }
+            .sign-up {
+                display: none;
+            }
+            .container.active .sign-up {
+                display: flex;
+            }
+            .container.active .sign-in {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container" id="container">
+        
+        <!-- REGISTER FORM -->
         <div class="form-container sign-up">
             <form action="{% url 'register' %}" method="post">
-               
-                <h1 style="margin-bottom: 10px;">Create Account</h1>
-                
-
+                {% csrf_token %}
+                <h1>Join GameHub</h1>
                 <input type="text" name="first_name" placeholder="First Name" />
                 <input type="text" name="last_name" placeholder="Last Name" />
                 <input type="text" name="username" placeholder="Username" />
                 <input type="email" name="email" placeholder="Email" />
                 <input type="password" name="password1" placeholder="Password" />
                 <input type="password" name="password2" placeholder="Confirm Password" />
-                <button type="submit" style="margin-bottom:20px;">Sign Up</button>
-                
+                <button type="submit">Sign Up</button>
             </form>
         </div>
+
+        <!-- LOGIN FORM -->
         <div class="form-container sign-in">
             <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
-                <h1 style="margin-bottom: 10px;">Login</h1>
+                <h1>Welcome Back</h1>
                 <input type="text" name="username" placeholder="Username" required />
                 <input type="password" name="password" placeholder="Password" required />
-
-                <a href="#">Forget Your Password?</a>
-                <button type="submit" style="margin-bottom:20px;">Login</button>
-
-                
+                <a href="#">Forgot Password?</a>
+                <button type="submit">Login</button>
             </form>
         </div>
+
+        <!-- TOGGLE OVERLAY -->
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Already have an account?</p>
+                    <h1>Ready to Play?</h1>
+                    <p>Enter your credentials to access your GameHub dashboard.</p>
                     <button class="hidden" id="login">Login</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>
-                        Don't have an account? Register with your personal details
-                    </p>
+                    <h1>New Player?</h1>
+                    <p>Register with your personal details to start your gaming journey.</p>
                     <button class="hidden" id="register">Sign Up</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SCRIPT -->
+    <!-- Preserving your existing logic script reference -->
     <script src="{% static 'script1.js' %}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var container = document.getElementById("container");
             var showRegister = "{{ show_register|yesno:'true,false' }}";
+            
             if (showRegister === "true") {
                 container.classList.add("active");
             }
