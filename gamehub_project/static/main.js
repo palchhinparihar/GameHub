@@ -748,41 +748,503 @@ function playGame(gameFile) {
 
 main.js
 
-// THEME TOGGLE SYSTEM
+// ============================================
+// GAME STATISTICS AND ANALYTICS
+// ============================================
 
-const themeToggle = document.getElementById("themeToggle");
-const body = document.body;
+// Initialize game statistics
+function initializeGameStats() {
+  // Create stats object if it doesn't exist
+  if (!localStorage.getItem("gameStats")) {
+    const initialStats = {};
+    games.forEach(game => {
+      initialStats[game.id] = {
+        plays: 0,
+        lastPlayed: null,
+        totalTime: 0
+      };
+    });
+    localStorage.setItem("gameStats", JSON.stringify(initialStats));
+  }
+}
 
-// Load saved theme
-let savedTheme = localStorage.getItem("theme") || "dark";
-body.setAttribute("data-theme", savedTheme);
-updateIcon(savedTheme);
+// Track game play
+function trackGamePlay(gameId) {
+  const stats = JSON.parse(localStorage.getItem("gameStats") || "{}");
+  const gameStat = stats[gameId] || { plays: 0, lastPlayed: null, totalTime: 0 };
+  
+  gameStat.plays += 1;
+  gameStat.lastPlayed = new Date().toISOString();
+  
+  stats[gameId] = gameStat;
+  localStorage.setItem("gameStats", JSON.stringify(stats));
+}
 
-// Toggle theme
-themeToggle.addEventListener("click", () => {
-    let currentTheme = body.getAttribute("data-theme");
-    let newTheme = currentTheme === "dark" ? "light" : "dark";
+// Get game statistics
+function getGameStats(gameId) {
+  const stats = JSON.parse(localStorage.getItem("gameStats") || "{}");
+  return stats[gameId] || { plays: 0, lastPlayed: null, totalTime: 0 };
+}
 
-    body.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateIcon(newTheme);
+// Get top played games
+function getTopPlayedGames(limit = 5) {
+  const stats = JSON.parse(localStorage.getItem("gameStats") || "{}");
+  return Object.entries(stats)
+    .sort((a, b) => b[1].plays - a[1].plays)
+    .slice(0, limit)
+    .map(([gameId, stat]) => {
+      const game = games.find(g => g.id === gameId);
+      return { ...game, ...stat };
+    })
+    .filter(game => game !== undefined);
+}
+
+// Update game card with play count
+function updateGameCardWithStats() {
+  // This function can be called to update game cards with play statistics
+  // Implementation depends on UI design
+}
+
+// ============================================
+// ENHANCED GAME CATEGORIES
+// ============================================
+
+// Get all unique categories
+function getAllCategories() {
+  const categories = [...new Set(games.map(game => game.category))];
+  return categories.sort();
+}
+
+// Filter games by category
+function filterGamesByCategory(category) {
+  if (category === "all") {
+    renderGames(games);
+    return;
+  }
+  
+  const filteredGames = games.filter(game => game.category === category);
+  renderGames(filteredGames);
+}
+
+// Create category filter UI
+function createCategoryFilters() {
+  const categories = getAllCategories();
+  const categoryContainer = document.getElementById("categoryFilters");
+  
+  if (!categoryContainer) return;
+  
+  // Add "All" category
+  const allButton = document.createElement("button");
+  allButton.className = "category-btn active";
+  allButton.textContent = "All Games";
+  allButton.onclick = () => {
+    filterGamesByCategory("all");
+    // Update active state
+    document.querySelectorAll(".category-btn").forEach(btn => {
+      btn.classList.remove("active");
+    });
+    allButton.classList.add("active");
+  };
+  
+  categoryContainer.appendChild(allButton);
+  
+  categories.forEach(category => {
+    const button = document.createElement("button");
+    button.className = "category-btn";
+    button.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+    button.onclick = () => {
+      filterGamesByCategory(category);
+      // Update active state
+      document.querySelectorAll(".category-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      button.classList.add("active");
+    };
+    
+    categoryContainer.appendChild(button);
+  });
+}
+
+// ============================================
+// IMPROVED GAME SEARCH WITH SUGGESTIONS
+// ============================================
+
+// Enhanced search with suggestions
+function setupImprovedSearch() {
+  const searchInput = document.getElementById("searchInput");
+  const gamesGrid = document.getElementById("gamesGrid");
+  
+  if (!searchInput || !gamesGrid) return;
+
+  // Create search suggestions container
+  const suggestionsContainer = document.createElement("div");
+  suggestionsContainer.id = "searchSuggestions";
+  suggestionsContainer.className = "search-suggestions";
+  searchInput.parentNode.insertBefore(suggestionsContainer, searchInput.nextSibling);
+
+  searchInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    
+    // Clear previous suggestions
+    suggestionsContainer.innerHTML = "";
+    
+    if (searchTerm.length > 0) {
+      // Filter games for suggestions
+      const suggestions = games.filter(
+        (game) =>
+          game.title.toLowerCase().includes(searchTerm) ||
+          game.description.toLowerCase().includes(searchTerm) ||
+          game.category.toLowerCase().includes(searchTerm)
+      ).slice(0, 5); // Limit to 5 suggestions
+      
+      if (suggestions.length > 0) {
+        suggestions.forEach(suggestion => {
+          const suggestionItem = document.createElement("div");
+          suggestionItem.className = "suggestion-item";
+          suggestionItem.innerHTML = `
+            <img src="${suggestion.image}" alt="${suggestion.title}" class="suggestion-img" />
+            <div class="suggestion-content">
+              <h4>${suggestion.title}</h4>
+              <p>${suggestion.category}</p>
+            </div>
+          `;
+          suggestionItem.onclick = () => {
+            searchInput.value = suggestion.title;
+            suggestionsContainer.innerHTML = "";
+            const filteredGames = games.filter(
+              (game) =>
+                game.title.toLowerCase().includes(searchTerm) ||
+                game.description.toLowerCase().includes(searchTerm) ||
+                game.category.toLowerCase().includes(searchTerm)
+            );
+            renderGames(filteredGames);
+          };
+          suggestionsContainer.appendChild(suggestionItem);
+        });
+        suggestionsContainer.style.display = "block";
+      }
+    } else {
+      suggestionsContainer.style.display = "none";
+    }
+  });
+  
+  // Hide suggestions when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+      suggestionsContainer.style.display = "none";
+    }
+  });
+}
+
+// ============================================
+// GAME RATING SYSTEM
+// ============================================
+
+// Initialize game ratings
+function initializeGameRatings() {
+  if (!localStorage.getItem("gameRatings")) {
+    const initialRatings = {};
+    games.forEach(game => {
+      initialRatings[game.id] = {
+        average: 0,
+        totalRatings: 0,
+        userRating: null
+      };
+    });
+    localStorage.setItem("gameRatings", JSON.stringify(initialRatings));
+  }
+}
+
+// Rate a game
+function rateGame(gameId, rating) {
+  const ratings = JSON.parse(localStorage.getItem("gameRatings") || "{}");
+  const gameRating = ratings[gameId] || { average: 0, totalRatings: 0, userRating: null };
+  
+  // Store user's rating
+  const oldUserRating = gameRating.userRating || 0;
+  gameRating.userRating = rating;
+  
+  // Update average
+  const totalRatings = gameRating.totalRatings;
+  const currentAverage = gameRating.average;
+  
+  // Remove old user rating from total
+  const totalStars = (currentAverage * totalRatings) - oldUserRating;
+  
+  // If this is a new rating, increment total count
+  if (oldUserRating === 0) {
+    gameRating.totalRatings = totalRatings + 1;
+  }
+  
+  // Add new rating
+  const newTotalStars = totalStars + rating;
+  gameRating.average = newTotalStars / gameRating.totalRatings;
+  
+  ratings[gameId] = gameRating;
+  localStorage.setItem("gameRatings", JSON.stringify(ratings));
+}
+
+// Get game rating
+function getGameRating(gameId) {
+  const ratings = JSON.parse(localStorage.getItem("gameRatings") || "{}");
+  return ratings[gameId] || { average: 0, totalRatings: 0, userRating: null };
+}
+
+// Create star rating element
+function createStarRating(gameId, size = "small") {
+  const rating = getGameRating(gameId);
+  const container = document.createElement("div");
+  container.className = `star-rating ${size}`;
+  
+  // Create stars
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement("span");
+    star.className = "star";
+    star.innerHTML = "★";
+    star.dataset.rating = i;
+    
+    if (i <= Math.floor(rating.average)) {
+      star.classList.add("filled");
+    } else if (i === Math.ceil(rating.average) && rating.average % 1 !== 0) {
+      star.classList.add("half");
+    }
+    
+    // Add click event for user rating
+    star.addEventListener("click", () => {
+      rateGame(gameId, i);
+      // Re-render the rating display
+      const parent = container.parentNode;
+      const newRating = createStarRating(gameId, size);
+      parent.replaceChild(newRating, container);
+    });
+    
+    container.appendChild(star);
+  }
+  
+  // Add rating count
+  const count = document.createElement("span");
+  count.className = "rating-count";
+  count.textContent = `(${rating.totalRatings})`;
+  container.appendChild(count);
+  
+  return container;
+}
+
+// ============================================
+// IMPROVED GAME CARD RENDERING WITH RATING
+// ============================================
+
+// Render games with ratings
+function renderGamesWithRatings(gamesToRender = games) {
+  const gamesGrid = document.getElementById("gamesGrid");
+  if (!gamesGrid) return;
+  
+  gamesGrid.innerHTML = "";
+
+  gamesToRender.forEach((game, index) => {
+    const gameCard = document.createElement("div");
+    gameCard.className = "game-card";
+    gameCard.setAttribute("data-aos", "fade-up");
+    gameCard.setAttribute("data-aos-delay", index * 100);
+
+    gameCard.innerHTML = `
+      <div class="relative overflow-hidden rounded-xl mb-4">
+        <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-white font-orbitron font-semibold">${game.category}</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <h3 class="font-orbitron font-bold text-xl mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          ${game.title}
+        </h3>
+        <p class="font-rajdhani text-gray-400 mb-2">${game.description}</p>
+        <div class="rating-container mb-2" id="rating-${game.id}"></div>
+        <button onclick="playGame('${game.file}')" class="pixel-btn glow-on-hover game-play-btn w-full">
+          <i class="fas fa-rocket mr-2"></i>Play Now
+        </button>
+      </div>
+    `;
+
+    gamesGrid.appendChild(gameCard);
+    
+    // Add rating after the card is added to DOM
+    const ratingContainer = gameCard.querySelector(`#rating-${game.id}`);
+    if (ratingContainer) {
+      const starRating = createStarRating(game.id, "small");
+      ratingContainer.appendChild(starRating);
+    }
+  });
+
+  // Refresh AOS if available
+  if (typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
+}
+
+// ============================================
+// ACCESSIBILITY ENHANCEMENTS
+// ============================================
+
+// Add keyboard navigation for game cards
+function setupGameCardAccessibility() {
+  const gameCards = document.querySelectorAll(".game-card");
+  
+  gameCards.forEach(card => {
+    // Make game cards focusable
+    card.setAttribute("tabindex", "0");
+    
+    // Add keyboard event listener
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const playButton = card.querySelector(".game-play-btn");
+        if (playButton) {
+          playButton.click();
+        }
+      }
+    });
+  });
+}
+
+// Add focus styles for accessibility
+function addFocusStyles() {
+  const style = document.createElement("style");
+  style.textContent = `
+    .game-card:focus,
+    .category-btn:focus,
+    .search-input:focus {
+      outline: 2px solid var(--primary-accent);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+    
+    .game-card:focus-visible,
+    .category-btn:focus-visible,
+    .search-input:focus-visible {
+      outline: 2px solid var(--primary-accent);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// ============================================
+// IMPROVED RECENTLY PLAYED TRACKING
+// ============================================
+
+// Enhanced playGame function with statistics
+function playGame(gameFile) {
+  // ❗ 1) Block iframe scoring and redirect
+  if (window !== window.parent) return;
+
+  const game = games.find(g => g.file === gameFile);
+
+  if (game) {
+    // ❗ 2) Recently played
+    let recent = JSON.parse(localStorage.getItem("recentlyPlayed") || "[]");
+
+    recent = recent.filter(g => g.id !== game.id);
+    recent.unshift(game);
+    recent = recent.slice(0, 5);
+
+    localStorage.setItem("recentlyPlayed", JSON.stringify(recent));
+    
+    // Track game statistics
+    trackGamePlay(game.id);
+
+    // NOTE: Visit will be tracked by the individual game page on load to avoid duplicate counts.
+  }
+
+  // ❗ 4) Redirect to game
+  window.location.href = gameFile;
+}
+
+// ============================================
+// INITIALIZE ALL SYSTEMS
+// ============================================
+
+// Initialize everything when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize AOS (Animate On Scroll)
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }
+  
+  // Initialize game statistics
+  initializeGameStats();
+  
+  // Initialize game ratings
+  initializeGameRatings();
+  
+  // Initialize theme FIRST (before anything else renders)
+  initializeTheme();
+  
+  // Setup theme toggle
+  setupThemeToggle();
+  
+  // Setup system theme listener
+  setupSystemThemeListener();
+  
+  // Render games with ratings
+  renderGamesWithRatings();
+  
+  // Setup improved search
+  setupImprovedSearch();
+  
+  // Create category filters
+  createCategoryFilters();
+  
+  // Create particles
+  createParticles();
+  
+  // Setup game card accessibility
+  setupGameCardAccessibility();
+  
+  // Add focus styles
+  addFocusStyles();
+  
+  // Update footer year if element exists
+  const footerYear = document.getElementById('footeryear');
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear();
+  }
+  
+  console.log("✅ GameHub initialized successfully!");
+  console.log(`📊 Total games loaded: ${games.length}`);
+  
+  // Log top played games
+  const topGames = getTopPlayedGames(3);
+  if (topGames.length > 0) {
+    console.log("🔥 Top played games:", topGames.map(g => g.title));
+  }
 });
 
-// Update icon based on CURRENT theme
-function updateIcon(theme) {
-    if (theme === "dark") {
-        themeToggle.innerHTML = `<i class="fas fa-sun"></i>`; // switch to light
-    } else {
-        themeToggle.innerHTML = `<i class="fas fa-moon"></i>`; // switch to dark
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
+  });
+});
+
+
+function getCSRFToken() {
+  return document.cookie
+    .split(";")
+    .map(c => c.trim())
+    .find(c => c.startsWith("csrftoken="))
+    ?.split("=")[1] || "";
 }
 
-// Helper to allow clicking suggestions in the "No Results" message
-function fillSearch(term) {
-    const searchInput = document.getElementById("searchInput");
-    if (searchInput) {
-        searchInput.value = term;
-        // Trigger the input event so the search logic runs
-        searchInput.dispatchEvent(new Event('input'));
-    }
-}
+// Duplicate theme toggle system - REMOVED to prevent conflicts
