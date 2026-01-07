@@ -1,1111 +1,466 @@
-/* GameHub - Futuristic Gaming UI Styles with Dark Mode Support */
+/* =========================================================
+   GameHub – Futuristic Gaming UI (FIXED VERSION)
+   Dark Mode (default) + Proper Light Mode
+   ========================================================= */
 
-/* Import Fonts */
+/* =====================
+   IMPORT FONTS
+   ===================== */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
-/* ============================================
-   CSS VARILES - LIGHT & DARK THEMES
-   ============================================ */
+/* =====================
+   THEME VARIABLES
+   ===================== */
 :root {
-    /* Brand Colors (unchanged) */
+    /* Brand */
     --primary-purple: #8b5cf6;
     --primary-pink: #ec4899;
     --primary-blue: #3b82f6;
     --neon-purple: #a855f7;
     --neon-pink: #f472b6;
-    
+
     /* Dark Theme (Default) */
     --bg-primary: #0f0f23;
     --bg-secondary: #1a1a2e;
+
     --bg-gradient-start: #1e1b4b;
     --bg-gradient-middle: #1e3a8a;
     --bg-gradient-end: #312e81;
-    
+
     --text-primary: #ffffff;
     --text-secondary: #e5e7eb;
     --text-muted: #9ca3af;
-    --text-dark: #1f2937;
-    
+
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-bg-hover: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-border-hover: rgba(255, 255, 255, 0.2);
-    
+    --glass-border-hover: rgba(255, 255, 255, 0.25);
+
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
-    
+
     --input-bg: rgba(255, 255, 255, 0.1);
     --input-border: rgba(255, 255, 255, 0.2);
-    --input-focus-bg: rgba(255, 255, 255, 0.15);
-    
+
     --nav-link-color: #e5e7eb;
     --nav-link-hover-bg: rgba(139, 92, 246, 0.1);
-    
-    --scrollbar-track: rgba(255, 255, 255, 0.1);
-    
-    --feature-card-bg: rgba(255, 255, 255, 0.03);
-    --feature-card-hover-bg: rgba(255, 255, 255, 0.08);
-    
-    --social-link-bg: rgba(255, 255, 255, 0.1);
-    
-    --shadow-color: rgba(0, 0, 0, 0.3);
+
+    --shadow-color: rgba(0, 0, 0, 0.35);
     --overlay-gradient: rgba(255, 255, 255, 0.1);
 }
 
-/* Light Theme Variables */
-/* Light Theme Variables */
+/* =====================
+   LIGHT THEME
+   ===================== */
 [data-theme="light"] {
-    /* slightly darker text on very light bg for contrast */
-    --bg-primary: #f3f4f6;      /* page background */
-    --bg-secondary: #ffffff;    /* cards/nav */
-    --bg-gradient-start: #e0f2fe;
-    --bg-gradient-middle: #e5e7eb;
-    --bg-gradient-end: #eef2ff;
-    
-    --text-primary: #111827;    /* almost black */
-    --text-secondary: #1f2937;
-    --text-muted: #6b7280;
-    --text-dark: #111827;
+    --bg-primary: #f1f5f9;
+    --bg-secondary: #ffffff;
 
-    --glass-bg: rgba(255, 255, 255, 0.9);
-    --glass-bg-hover: rgba(255, 255, 255, 1);
-    --glass-border: rgba(55, 65, 81, 0.15);
-    --glass-border-hover: rgba(55, 65, 81, 0.3);
+    --bg-gradient-start: #e0e7ff;
+    --bg-gradient-middle: #f8fafc;
+    --bg-gradient-end: #ede9fe;
 
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(148, 163, 184, 0.3);
+    --text-primary: #0f172a;
+    --text-secondary: #1e293b;
+    --text-muted: #475569;
 
-    --input-bg: rgba(255, 255, 255, 0.95);
-    --input-border: rgba(148, 163, 184, 0.7);
-    --input-focus-bg: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-bg-hover: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(15, 23, 42, 0.15);
+    --glass-border-hover: rgba(15, 23, 42, 0.3);
 
-    --nav-link-color: #111827;
-    --nav-link-hover-bg: rgba(129, 140, 248, 0.12);
+    --card-bg: #ffffff;
+    --card-border: rgba(15, 23, 42, 0.15);
 
-    --scrollbar-track: rgba(148, 163, 184, 0.25);
+    --input-bg: #ffffff;
+    --input-border: rgba(15, 23, 42, 0.25);
 
-    --feature-card-bg: rgba(255, 255, 255, 0.95);
-    --feature-card-hover-bg: #ffffff;
-
-    --social-link-bg: rgba(148, 163, 184, 0.18);
+    --nav-link-color: #0f172a;
+    --nav-link-hover-bg: rgba(139, 92, 246, 0.12);
 
     --shadow-color: rgba(15, 23, 42, 0.12);
-    --overlay-gradient: rgba(15, 23, 42, 0.12);
+    --overlay-gradient: rgba(15, 23, 42, 0.08);
 }
 
-
-/* ============================================
+/* =====================
    BASE STYLES
-   ============================================ */
+   ===================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Rajdhani', sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    padding-top: 64px; /* Account for fixed navbar */
+    padding-top: 64px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Hero section specific styling */
-section {
-    position: relative;
+/* =====================
+   GRADIENT BACKGROUND
+   ===================== */
+.animate-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--bg-gradient-start),
+        var(--bg-gradient-middle),
+        var(--bg-gradient-end)
+    );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
-section:first-of-type {
-    margin-top: 0;
-    min-height: calc(100vh - 64px);
-}
-
-.font-orbitron {
-    font-family: 'Orbitron', monospace;
-}
-
-.font-rajdhani {
-    font-family: 'Rajdhani', sans-serif;
-}
-
-/* ============================================
-   ANIMATED BACKGROUND
-   ============================================ */
 @keyframes gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-.animate-gradient {
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
-
-/* Background gradient adjustment for light mode */
-[data-theme="light"] .animate-gradient {
-    opacity: 0.6;
-}
-
-/* ============================================
-   GLASS MORPHISM EFFECTS
-   ============================================ */
-.glass-nav {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+/* =====================
+   GLASS UI
+   ===================== */
+.glass-nav,
+.glass-card,
+.game-card {
     background: var(--glass-bg);
-    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-radius: 18px;
     transition: all 0.3s ease;
+}
+
+.glass-nav {
     height: 64px;
+    position: fixed;
+    top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
-.glass-nav .container {
-    height: 100%;
-}
-
-.glass-nav .flex {
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-}
-
-/* Fix for navbar content overflow */
-@media (max-width: 1024px) {
-    .glass-nav .search-input {
-        width: 120px;
-        font-size: 0.875rem;
-    }
-    
-    .glass-nav .nav-link {
-        font-size: 0.875rem;
-        padding: 0.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding-top: 64px;
-    }
-    
-    .glass-nav {
-        height: auto;
-        min-height: 64px;
-    }
-    
-    .glass-nav .container {
-        padding: 0.5rem 1rem;
-    }
-    
-    .glass-nav .flex {
-        gap: 0.25rem;
-    }
-    
-    .search-input {
-        width: 100px;
-        padding: 6px 32px 6px 12px;
-        font-size: 0.75rem;
-    }
-}
-
-@media (max-width: 640px) {
-    .glass-nav .nav-link {
-        display: none;
-    }
-}
-
-.glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px var(--shadow-color);
-    transition: all 0.3s ease;
-}
-
-/* ============================================
-   NAVIGATION STYLES
-   ============================================ */
+/* =====================
+   NAVIGATION
+   ===================== */
 .nav-link {
-    position: relative;
-    padding: 8px 16px;
     color: var(--nav-link-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    padding: 8px 16px;
     border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-    color: var(--neon-purple);
     background: var(--nav-link-hover-bg);
+    color: var(--neon-purple);
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-purple), var(--primary-pink));
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* ============================================
-   SEARCH INPUT
-   ============================================ */
+/* =====================
+   INPUTS
+   ===================== */
 .search-input {
     background: var(--input-bg);
     border: 1px solid var(--input-border);
-    border-radius: 12px;
-    padding: 8px 40px 8px 16px;
     color: var(--text-primary);
-    font-size: 14px;
-    width: 250px;
+    padding: 8px 40px 8px 16px;
+    border-radius: 12px;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .search-input:focus {
     outline: none;
     border-color: var(--neon-purple);
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-    background: var(--input-focus-bg);
 }
 
-.search-input::placeholder {
-    color: var(--text-muted);
-}
-
-/* Search icon color adjustment */
-.search-input + i {
-    color: var(--text-muted);
-    transition: color 0.3s ease;
-}
-
-/* ============================================
-   THEME TOGGLE BUTTON
-   ============================================ */
-.theme-toggle {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 10px;
-    padding: 8px 12px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 40px;
-    height: 40px;
-}
-
-.theme-toggle:hover {
-    background: var(--glass-bg-hover);
-    color: var(--neon-purple);
-    transform: scale(1.1);
-    border-color: var(--neon-purple);
-}
-
-.theme-toggle i {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-}
-
-.theme-toggle:active i {
-    transform: rotate(360deg);
-}
-
-/* ============================================
-   NEON BUTTONS
-   ============================================ */
-.neon-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 32px;
-    font-family: 'Orbitron', monospace;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    z-index: 1;
-}
-
+/* =====================
+   BUTTONS
+   ===================== */
 .neon-button.primary {
     background: linear-gradient(45deg, var(--primary-purple), var(--primary-pink));
-    color: white;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
-}
-
-.neon-button.primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.6);
+    color: #fff;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.45);
 }
 
 .neon-button.secondary {
     background: var(--glass-bg);
     color: var(--text-primary);
     border: 1px solid var(--glass-border-hover);
-    backdrop-filter: blur(10px);
 }
 
-.neon-button.secondary:hover {
-    background: var(--glass-bg-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px var(--shadow-color);
-}
-
-/* ============================================
-   GLOW TEXT EFFECT
-   ============================================ */
+/* =====================
+   GLOW TEXT
+   ===================== */
 .glow-text {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5),
-                 0 0 40px rgba(139, 92, 246, 0.3),
-                 0 0 60px rgba(139, 92, 246, 0.2);
+    text-shadow:
+        0 0 20px rgba(139, 92, 246, 0.5),
+        0 0 40px rgba(139, 92, 246, 0.3);
 }
 
 [data-theme="light"] .glow-text {
-    text-shadow: 0 0 30px rgba(139, 92, 246, 0.4),
-                 0 0 50px rgba(139, 92, 246, 0.2);
+    text-shadow:
+        0 0 24px rgba(139, 92, 246, 0.35);
 }
 
-/* ============================================
-   GAME CARDS
-   ============================================ */
-.game-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 20px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-}
-
-.game-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--overlay-gradient), transparent);
-    transition: left 0.5s;
-}
-
-.game-card:hover::before {
-    left: 100%;
-}
-
-.game-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
-    border-color: var(--neon-purple);
-}
-
-.game-card img {
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.game-card:hover img {
-    transform: scale(1.05);
-}
-
-.game-play-btn {
-    background: linear-gradient(45deg, var(--primary-purple), var(--primary-pink));
-    border: none;
-    border-radius: 10px;
-    padding: 8px 20px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Orbitron', monospace;
-}
-
-.game-play-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
-}
-
-/* ============================================
+/* =====================
    FEATURE CARDS
-   ============================================ */
+   ===================== */
 .feature-card {
-    text-align: center;
-    padding: 20px;
-    background: var(--feature-card-bg);
-    border-radius: 15px;
+    background: var(--card-bg);
     border: 1px solid var(--card-border);
+    padding: 20px;
+    border-radius: 16px;
     transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
-    background: var(--feature-card-hover-bg);
-    border-color: var(--glass-border-hover);
+    transform: translateY(-6px);
+    border-color: var(--neon-purple);
 }
 
-.feature-card i {
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover i {
-    transform: scale(1.1);
-}
-
-/* ============================================
+/* =====================
    SOCIAL LINKS
-   ============================================ */
+   ===================== */
 .social-link {
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--social-link-bg);
-    border-radius: 10px;
-    color: var(--text-secondary);
-    text-decoration: none;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .social-link:hover {
     background: var(--neon-purple);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
 }
 
-/* ============================================
-   SCROLLBAR STYLING
-   ============================================ */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
-}
-
+/* =====================
+   SCROLLBAR
+   ===================== */
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, var(--primary-purple), var(--primary-pink));
     border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-@media (max-width: 768px) {
-    .search-input {
-        width: 180px;
-    }
-    
-    .neon-button {
-        padding: 10px 24px;
-        font-size: 14px;
-    }
-    
-    .glow-text {
-        font-size: 3rem;
-    }
-    
-    .glass-card {
-        padding: 20px;
-        margin: 0 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .search-input {
-        width: 150px;
-    }
-    
-    .glow-text {
-        font-size: 2.5rem;
-    }
-}
-
-/* ============================================
+/* =====================
    ANIMATIONS
-   ============================================ */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
-
-.loading {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
+   ===================== */
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
 }
 
-.floating {
-    animation: float 6s ease-in-out infinite;
-}
+.floating { animation: float 6s ease-in-out infinite; }
 
-/* ============================================
-   ADDITIONAL BUTTON STYLES
-   ============================================ */
-.gh-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: 'Rajdhani', sans-serif; 
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    padding: 12px 32px; 
-    font-size: 16px;
-    border-radius: 12px;
-    width: auto;
-    height: auto;
-    border: none;
-}
-
-.glow-on-hover {
-    font-family: 'Orbitron', sans-serif;
-    outline: none;
-    color: #ffffff;
-    background: linear-gradient(90deg, #ff007f, #5700ff);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: transform 0.3s, background 0.5s;
-    overflow: hidden;
-}
-
-.glow-on-hover:hover {
-    transform: scale(1.08);
-    animation: pulse-btn 1.2s infinite alternate;
-}
-
-@keyframes pulse-btn {
-    0% {
-        transform: scale(1.08);
-    }
-    100% {
-        transform: scale(1.1);
-    }
-}
-
-.glow-on-hover::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    background: linear-gradient(90deg, #ff007f, #01d2d9, #6619ff, #ff007f);
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(13px);
-    animation: neon-glow 6s infinite linear;
-    border-radius: 30px;
-}
-
-@keyframes neon-glow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.glow-on-hover:active {
-    transform: scale(0.98);
-    background: #ff007f;
-}
-
-.pixel-btn {
-    font-family: 'Orbitron', sans-serif;
-    border: 2px solid var(--text-primary);
-    background: var(--glass-bg);
-    color: var(--text-primary);
-    padding: 12px 30px;
-    transition: 0.3s ease;
-    border-radius: 15px;
-    letter-spacing: 1px;
-}
-
-.pixel-btn:hover {
-    background: var(--text-primary);
-    color: var(--bg-primary);
-    border-color: var(--text-primary);
-}
-
-/* Light mode adjustments for pixel button */
-[data-theme="light"] .pixel-btn {
-    border-color: var(--primary-purple);
-    color: var(--primary-purple);
-}
-
-[data-theme="light"] .pixel-btn:hover {
-    background: var(--primary-purple);
-    color: white;
-}
-
-/* ============================================
-   SMOOTH THEME TRANSITIONS
-   ============================================ */
-body, 
-.glass-nav,
+/* =====================
+   SMOOTH TRANSITIONS
+   ===================== */
+body,
 .glass-card,
-.game-card,
+.glass-nav,
 .feature-card,
 .search-input,
-.theme-toggle,
-.neon-button,
-.social-link,
 .nav-link,
-.pixel-btn {
-    transition: background-color 0.3s ease, 
-                color 0.3s ease, 
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+.neon-button,
+.social-link {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
-
-/* THEMES  */
+/* ============================================
+   FIXED LIGHT MODE BACKGROUND + TEXT
+   ============================================ */
 
 [data-theme="light"] {
-    background-color: #ffffff !important;
-    color: #111 !important;
-    transition: all 0.25s ease-in-out;
+    /* Page background */
+    background-color: #f8fafc !important;
+    color: #111827 !important;
 }
 
-[data-theme="dark"] {
-    background-color: #0f0f0f !important;
-    color: #fff !important;
-    transition: all 0.25s ease-in-out;
-}
-
-/* Navbar Light Mode */
-[data-theme="light"] .glass-nav {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-}
-
-/* Navbar Dark Mode */
-[data-theme="dark"] .glass-nav {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-/* ============================================
-   WHACK-A-MOLE GAME STYLES
-   ============================================ */
-
-/* Whack-A-Mole Toast Notifications */
-.whack-toast {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 10px 14px;
-    border-radius: 10px;
-    z-index: 9999;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    transform: translateY(10px);
-    opacity: 0;
-    transition: all 220ms ease;
-}
-
-/* Mole Grid Responsive Design */
-@media (max-width: 768px) {
-    .mole-grid {
-        gap: 1rem !important;
-        padding: 0 1rem;
-    }
-    
-    .mole-hole {
-        border-width: 2px;
-    }
-    
-    .mole {
-        width: 75% !important;
-        height: 75% !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .mole-grid {
-        gap: 0.75rem !important;
-    }
-    
-    .mole {
-        width: 70% !important;
-        height: 70% !important;
-    }
-}
-
-/* Mole Animation Enhancement */
-.mole.active {
-    animation: molePopUp 0.2s ease;
-}
-
-@keyframes molePopUp {
-    0% {
-        bottom: -100%;
-        transform: translateX(-50%) scale(0.5);
-    }
-    100% {
-        bottom: 10%;
-        transform: translateX(-50%) scale(1);
-    }
-}
-
-/* Game Over Modal Animation */
-.game-over-modal {
-    animation: modalFadeIn 0.3s ease;
-}
-
-@keyframes modalFadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Button Pulse Effect on Hover */
-.btn-game:hover {
-    animation: buttonPulse 0.5s ease infinite;
-}
-
-@keyframes buttonPulse {
-    0%, 100% {
-        transform: translateY(-2px) scale(1);
-    }
-    50% {
-        transform: translateY(-2px) scale(1.05);
-    }
-}
-
-/* Score Counter Animation */
-@keyframes scoreIncrease {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-/* High Score Glow Effect */
-.stat-value {
-    text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
-}
-
-/* Mole Hole Glow on Active */
-.mole-hole:has(.mole.active) {
-    border-color: rgba(245, 158, 11, 0.8) !important;
-    box-shadow: 0 0 25px rgba(245, 158, 11, 0.6) !important;
-}
-
-/* Light Mode Support for Whack-A-Mole */
-[data-theme="light"] .game-container {
-    background: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.05));
-    border-color: rgba(139, 92, 246, 0.3);
-}
-
-[data-theme="light"] .mole-hole {
-    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-    border-color: rgba(139, 92, 246, 0.4);
-}
-
-[data-theme="light"] .stat {
-    color: #1f2937;
-}
-
-[data-theme="light"] .alert {
-    background: linear-gradient(145deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.1));
-    color: #1f2937;
-}
-/* ============================================
-   LIGHT MODE ADJUSTMENTS
-   ============================================ */
-
-[data-theme="light"],
+/* Body */
 [data-theme="light"] body {
-    
-    background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%) !important;
-    background-attachment: fixed !important; 
-    color: #1f2937 !important;
+    background-color: #f8fafc !important;
+    color: #111827 !important;
 }
 
-[data-theme="light"] h1, 
-[data-theme="light"] .logo-text {
-    background: linear-gradient(to right, #7c3aed 0%, #2563eb 100%) !important;
-    
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    
-    text-shadow: none !important;
- 
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
+/* Sections */
+[data-theme="light"] section {
+    background-color: transparent !important;
 }
 
-[data-theme="light"] .glass-nav, 
+/* Glass / cards / containers */
+[data-theme="light"] .glass-nav,
 [data-theme="light"] .glass-card,
-[data-theme="light"] .search-input {
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+[data-theme="light"] .game-card,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .about-card,
+[data-theme="light"] .game-container {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-[data-theme="light"] .neon-button.primary {
-    color: #ffffff !important;
-    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3) !important;
+/* Text elements */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6,
+[data-theme="light"] p,
+[data-theme="light"] span,
+[data-theme="light"] li,
+[data-theme="light"] a {
+    color: #111827 !important;
 }
 
-/* =========================================
-   REVIEWS SECTION 
-   ========================================= */
-
-.reviews-section {
-    padding: 80px 20px;
-    position: relative;
+/* Muted text */
+[data-theme="light"] .text-muted {
+    color: #4b5563 !important;
 }
 
-.review-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    height: 100%;
+/* Inputs */
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
 }
 
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-    border-color: var(--neon-purple);
+/* Navbar links */
+[data-theme="light"] .nav-link {
+    color: #111827 !important;
 }
 
-.review-card img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
+[data-theme="light"] .nav-link:hover {
+    background: rgba(139, 92, 246, 0.1) !important;
+    color: #7c3aed !important;
 }
 
-/* =========================================
-   ABOUT SECTION 
-   ========================================= */
-.about-section {
-    padding: 80px 20px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Remove dark gradients in light mode */
+[data-theme="light"] .animate-gradient {
+    background: none !important;
 }
-
-.about-card {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px;
-    background: rgba(15, 23, 42, 0.6); /* Dark Glass Default */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    text-align: center;
-}
-
-.about-text h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--primary-purple);
-    font-family: 'Orbitron', sans-serif;
-}
-
-.about-text p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    max-width: 700px;
-    margin: 0 auto 1rem auto;
-}
-
-/* Features Grid Layout */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.feature-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 15px;
-    transition: transform 0.3s ease, background 0.3s ease;
-    border: 1px solid transparent;
-}
-
-.feature-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--primary-purple);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    background: linear-gradient(45deg, var(--primary-purple), var(--primary-pink));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.feature-item h3 {
-    font-family: 'Orbitron', sans-serif;
-    margin-bottom: 10px;
-    color: var(--text-primary);
-}
-
-.feature-item p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-}
-
-/* GitHub Button */
-.github-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    padding: 12px 30px;
-    background: #24292e;
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.github-btn:hover {
-    background: #000;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-[data-theme="light"] .about-card {
-    background: rgba(255, 255, 255, 0.85) !important;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="light"] .about-text h2 {
-    color: #7c3aed; 
-}
-
-[data-theme="light"] .about-text p {
-    color: #374151 !important;
-}
-
-[data-theme="light"] .feature-item {
-    background: #ffffff;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border: 1px solid #e5e7eb;
-}
-
-[data-theme="light"] .feature-item h3 {
-    color: #111827; 
-}
-
-[data-theme="light"] .feature-item p {
-    color: #4b5563 !important; 
-}
-
-[data-theme="light"] .brand-highlight {
-    color: #7c3aed;
-}
-
-@media (max-width: 768px) {
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ============================================
-    SEARCH FEEDBACK STYLES (#253)
+   LIGHT MODE – LEADERBOARD FIX
    ============================================ */
 
-#noResults {
-    transition: all 0.4s ease-in-out;
+[data-theme="light"] .leaderboard,
+[data-theme="light"] .leaderboard-container,
+[data-theme="light"] .leaderboard-card,
+[data-theme="light"] .leaderboard-table,
+[data-theme="light"] .leaderboard-row {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Ensure the hidden class is respected */
-#noResults.hidden {
-    display: none !important;
+/* Leaderboard header */
+[data-theme="light"] .leaderboard-header,
+[data-theme="light"] .leaderboard-title {
+    color: #111827 !important;
 }
 
-#noResults i {
-    filter: drop-shadow(0 0 15px var(--primary-purple));
+/* Leaderboard rows */
+[data-theme="light"] .leaderboard-row {
+    background: #030303 !important;
 }
 
-/* Light mode overrides for search feedback */
-[data-theme="light"] #noResults h3 {
-    color: #7c3aed !important; /* Matches your light mode purple */
+[data-theme="light"] .leaderboard-row:nth-child(even) {
+    background: #000000 !important;
 }
 
-[data-theme="light"] #noResults .bg-white\/5 {
-    background: rgba(124, 58, 237, 0.1) !important;
-    border-color: rgba(124, 58, 237, 0.2) !important;
+/* Table cells */
+[data-theme="light"] .leaderboard th,
+[data-theme="light"] .leaderboard td {
+    color: #111827 !important;
 }
 
-/* Hover effect for the suggested game links */
-#noResults .cursor-pointer:hover {
-    text-shadow: 0 0 8px var(--primary-pink);
-    transition: all 0.2s ease;
+/* Rank highlight */
+[data-theme="light"] .leaderboard-rank {
+    color: #7c3aed !important;
+    font-weight: 700;
+}
+
+/* Hover effect */
+[data-theme="light"] .leaderboard-row:hover {
+    background: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Remove dark shadows */
+[data-theme="light"] .leaderboard-card {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+}
+/* ============================================
+   LIGHT MODE – LOGIN FIX
+   ============================================ */
+
+[data-theme="light"] .login-container,
+[data-theme="light"] .login-card,
+[data-theme="light"] .login-form {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Login header */
+[data-theme="light"] .login-header,
+[data-theme="light"] .login-title {
+    color: #111827 !important;
+}
+
+/* Login inputs */
+[data-theme="light"] .login-input {
+    background: #f9fafb !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Login button */
+[data-theme="light"] .login-button {
+    background: #7c3aed !important;
+    color: #ffffff !important;
+}
+[data-theme="light"] .login-table,
+[data-theme="light"] .login-row {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Login header */
+[data-theme="light"] .login-header,
+[data-theme="light"] .login-title {
+    color: #111827 !important;
+}
+
+/* Login rows */
+[data-theme="light"] .login-row {
+    background: #f9fafb !important;
+}
+
+[data-theme="light"] .login-row:nth-child(even) {
+    background: #f1f5f9 !important;
+}
+
+
+/* Hover effect */
+[data-theme="light"] .login-row:hover {
+    background: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Remove dark shadows */
+[data-theme="light"] .login-card {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
 }
