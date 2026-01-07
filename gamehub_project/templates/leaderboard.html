@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -8,6 +9,10 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script>
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
@@ -39,13 +44,14 @@
             class="glass-card p-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-lg shadow-purple-900/40 animate__animated animate__fadeInUp">
 
             <table class="min-w-full text-center">
-                <thead>
-                    <tr class="text-purple-300 border-b border-white/20 text-lg font-orbitron">
+               <thead>
+                    <tr class="text-purple-500 font-extrabold text-lg tracking-wide border-b-2 border-white/30">
                         <th class="py-4">Rank</th>
                         <th class="py-4">Player</th>
                         <th class="py-4">Engagement Score</th>
                     </tr>
                 </thead>
+
 
                 <tbody>
                 {% for profile in users %}
@@ -65,14 +71,14 @@
                         </td>
 
                         <!-- Username -->
-                        <td class="py-4 font-rajdhani text-xl text-gray-200">
+                        <td class="py-4 font-rajdhani text-xl text-black-200 font-bold">
                             {{ profile.user.username }}
                         </td>
 
                         <!-- Engagement Score -->
                         <td class="py-4 font-orbitron text-purple-400 text-2xl font-extrabold">
     {{ profile.score|default:"0" }}
-    <div class="text-xs text-gray-500 mt-1">({{ profile.visits }} visits + {{ profile.plays }} plays)</div>
+    <div class="text-xs text-black-500 mt-1">({{ profile.visits }} visits + {{ profile.plays }} plays)</div>
 </td>
                     </tr>
 
