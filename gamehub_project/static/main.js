@@ -598,13 +598,14 @@ function renderGames(gamesToRender = games) {
 function setupEnhancedSearch() {
   const searchInput = document.getElementById("searchInput");
   const gamesGrid = document.getElementById("gamesGrid");
+  const noResults = document.getElementById("noResults"); // Reference the new ID from index.html
   
   if (!searchInput || !gamesGrid) return;
 
   searchInput.addEventListener("input", (e) => {
     const searchTerm = e.target.value.toLowerCase();
 
-    // Add loading state
+    // Add loading state effect
     gamesGrid.style.opacity = "0.5";
 
     setTimeout(() => {
@@ -615,24 +616,25 @@ function setupEnhancedSearch() {
           game.category.toLowerCase().includes(searchTerm)
       );
 
+      // 1. Render the games
       renderGames(filteredGames);
       gamesGrid.style.opacity = "1";
 
-      // scroll to "Featured Games" section
+      // 2. Handle the "No Results" visibility
+      if (filteredGames.length === 0 && searchTerm !== "") {
+        // Show the message, hide the grid
+        if (noResults) noResults.classList.remove('hidden');
+        gamesGrid.classList.add('hidden');
+      } else {
+        // Hide the message, show the grid
+        if (noResults) noResults.classList.add('hidden');
+        gamesGrid.classList.remove('hidden');
+      }
+
+      // 3. Scroll to section if searching
       const gamesSection = document.getElementById('games');
       if (gamesSection && searchTerm) {
         gamesSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-
-      // Show no results message
-      if (filteredGames.length === 0 && searchTerm) {
-        gamesGrid.innerHTML = `
-          <div class="col-span-full text-center py-12">
-            <i class="fas fa-search text-6xl text-gray-600 mb-4"></i>
-            <h3 class="font-orbitron text-xl mb-2" style="color: var(--text-secondary)">No games found</h3>
-            <p class="font-rajdhani" style="color: var(--text-muted)">Try searching with different keywords</p>
-          </div>
-        `;
       }
     }, 300);
   });

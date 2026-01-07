@@ -1076,3 +1076,36 @@ body,
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+    SEARCH FEEDBACK STYLES (#253)
+   ============================================ */
+
+#noResults {
+    transition: all 0.4s ease-in-out;
+}
+
+/* Ensure the hidden class is respected */
+#noResults.hidden {
+    display: none !important;
+}
+
+#noResults i {
+    filter: drop-shadow(0 0 15px var(--primary-purple));
+}
+
+/* Light mode overrides for search feedback */
+[data-theme="light"] #noResults h3 {
+    color: #7c3aed !important; /* Matches your light mode purple */
+}
+
+[data-theme="light"] #noResults .bg-white\/5 {
+    background: rgba(124, 58, 237, 0.1) !important;
+    border-color: rgba(124, 58, 237, 0.2) !important;
+}
+
+/* Hover effect for the suggested game links */
+#noResults .cursor-pointer:hover {
+    text-shadow: 0 0 8px var(--primary-pink);
+    transition: all 0.2s ease;
+}
